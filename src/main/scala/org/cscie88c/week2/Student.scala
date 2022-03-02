@@ -34,8 +34,8 @@ object Student {
    ).map(Student(_))
   }
 
-  def studentNamesByCountry(country: String): List[String] =
-    allStudents.filter(x => x.country == country)
+  def studentNamesByCountry(country: String): List[String] = ???
+    // allStudents.filter(x => x.country == country)
     // for (student <- allStudents) { student.country }
 
   def studentTotalsByCountry(country: String): Int = ???
