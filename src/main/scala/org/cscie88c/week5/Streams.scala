@@ -4,7 +4,6 @@ import java.util.UUID
 import scala.util.Random
 
 object Streams {
-  // Confirming I can push changes
   val rnd = new Random()
   def uuid: String = UUID.randomUUID.toString.replaceAll("-", "")
 
