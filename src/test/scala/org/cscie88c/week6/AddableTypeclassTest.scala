@@ -7,7 +7,6 @@ class AddableTypeclassTest extends StandardTest {
   "AddableAggregator" should {
     "sum a list of integers" in {
       val listOfInts = List(2,4,6,8)
-      val test = AddableAggregator.sumWithAddable(listOfInts)
       AddableAggregator.sumWithAddable(listOfInts) should be (20)
     }
     "sum a list of booleans" in {

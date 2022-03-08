@@ -4,27 +4,18 @@ package org.cscie88c.week6
 trait AddableTypeclass[A] {
   // add trait methods below
   def addTwoValues(a: A, b: A): A
-  def zero: A
 }
 
 object AddableTypeclass {
   
-  implicit val intAddableTypeclass: AddableTypeclass[Int] = new AddableTypeclass[Int] {
-    override def addTwoValues(a: Int, b: Int): Int = a + b
+  implicit val intAddableTypeclass: AddableTypeclass[Int] = _ + _
 
-    override def zero: Int = 0
-  }
-
-  implicit val boolAddableTypeclass: AddableTypeclass[Boolean] = new AddableTypeclass[Boolean] {
-    override def addTwoValues(a: Boolean, b: Boolean): Boolean = a || b
-
-    override def zero: Boolean = true
-  }
+  implicit val boolAddableTypeclass: AddableTypeclass[Boolean] = _ || _
 
 }
 
 object AddableAggregator {
   def sumWithAddable[A](list: List[A])(implicit addable: AddableTypeclass[A]): A = {
-    list.foldLeft(addable.zero)(addable.addTwoValues)
+    list.reduce(addable.addTwoValues)
   }
 }
