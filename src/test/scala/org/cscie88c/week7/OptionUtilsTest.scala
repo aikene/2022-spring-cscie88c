@@ -19,7 +19,7 @@ class OptionUtilsTest extends StandardTest {
           be("number of characters: 195")
       }
       "return an error when file does not exist" in {
-        OptionUtils.charCountAsString("src/test/resources/data/dirty-retail-data-sample.csv-x") should be("error opening file 1")
+        OptionUtils.charCountAsString("src/test/resources/data/dirty-retail-data-sample.csv-x") should be("error opening file")
 //        OptionUtils.charCountAsString("src/test/resources/data/dirty-retail-data-sample.csv-x") shouldBe a [Failure[FileNotFoundException]]
       }
     }
