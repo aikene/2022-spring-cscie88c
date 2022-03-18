@@ -1,5 +1,7 @@
 package org.cscie88c.week2
 
+import org.cscie88c.week2.Student.allStudents
+
 // complete the definition of the Subject case class and companion object
 final case class Subject(
   id: Int,
@@ -18,8 +20,15 @@ object Subject {
     )
   } 
 
-  val allSubjects: List[Subject] = ???
+  val allSubjects: List[Subject] =
+    List(
+    "1,History102,false",
+    "2,History204,false",
+    "3,Math,true",
+    "4,Physics,true"
+  ).map(Subject(_))
 
-  def stemSubjects: List[Subject] = ???
+
+  def stemSubjects: List[Subject] = allSubjects.filter(_.isStem)
   
-}//"1,Physics,true"
+}
