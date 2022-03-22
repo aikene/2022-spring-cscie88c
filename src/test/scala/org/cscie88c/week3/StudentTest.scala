@@ -26,11 +26,11 @@ class StudentTest extends StandardTest {
     }
     "calculating average score" should {
       "have an average of 99 for Aaron" in {
-        val actualResult = Student.averageScoreByStudent(ts3, aaronList)
+        val actualResult = Student.averageScoreByStudent(ts3, compList)
         actualResult should be (99)
       }
       "have an average of 82.5 for AJ" in {
-        val actualResult = Student.averageScoreByStudent(ts1, ajList)
+        val actualResult = Student.averageScoreByStudent(ts1, compList)
         actualResult should be (82.5)
       }
     }

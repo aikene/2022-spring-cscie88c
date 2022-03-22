@@ -8,11 +8,7 @@ object UtilFunctions {
       x: Int,
       y: Int,
       z: Int
-    ): Boolean = if ((x*x) + (y*y) == (z*z)) {
-      true
-    } else {
-      false
-    };
+    ): Boolean = ((x*x) + (y*y) == (z*z)) ;
 
   val pythTriplesUpto100: List[(Int, Int, Int)] = for {
     i <- (1 to 100).toList

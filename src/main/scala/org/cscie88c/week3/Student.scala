@@ -20,26 +20,25 @@ object Student {
       subject: String,
       studentList: List[Student]
     ): Double = {
-      var total = 0.0;
-      var counter = 0;
-      for ( student <- studentList if student.subject.contains(subject)) {
-        total += student.score;
-        counter += 1
-      }
+    val scores = studentList.filter(_.subject == subject).map(_.score)
+    if (scores.isEmpty) {
+      0.0
+    }
+    else {
+      scores.sum / scores.size.toDouble
+    }
 
-      return total/counter
     }
 
   def averageScoreByStudent(
       student: Student,
       studentList: List[Student]
     ): Double = {
-      var total = 0.0;
-      var counter = 0;
-      for ( stu <- studentList if stu.name.contains(student.name)) {
-        total += stu.score
-        counter += 1
-      }
-      return total/counter
+      val scores = studentList.filter(_.name == student.name).map(_.score)
+    if (scores.isEmpty) {
+      0.0
+    } else {
+      scores.sum / scores.size.toDouble
+    }
     }
 }
