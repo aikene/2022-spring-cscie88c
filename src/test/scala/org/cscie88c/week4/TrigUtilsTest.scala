@@ -8,20 +8,20 @@ class TrigUtilsTest extends StandardTest {
   "TrigUtils" when {
     "calling sin" should {
       "return the correct value for 90" in {
-        val sinValue: Double = TrigUtils.sinDegrees(90)
-        val expectedSinValue: Double = sin(90) 
+        val sinValue: Double = TrigUtils.sinDegrees(90.0)
+        val expectedSinValue: Double = sin(90.0.toRadians)
         sinValue should equal(expectedSinValue)
       }
       "return the correct value for 0" in {
-        val sinValue: Double = TrigUtils.sinDegrees(0)
-        val expectedSinValue: Double = sin(0) 
+        val sinValue: Double = TrigUtils.sinDegrees(0.0)
+        val expectedSinValue: Double = sin(0.0.toRadians)
         sinValue should equal(expectedSinValue)
       }    
     }
     "calling cos" should {
       "return the correct value for 90" in {
-        val cosValue: Double = TrigUtils.cosDegrees(90)
-        val expectedCosValue: Double = cos(90) 
+        val cosValue: Double = TrigUtils.cosDegrees(90.0)
+        val expectedCosValue: Double = cos(90.0.toRadians)
         cosValue should equal(expectedCosValue)
       }
       "return the correct value for 0" in {
