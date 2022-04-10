@@ -8,7 +8,7 @@ import org.apache.spark.sql.{Dataset}
 import pureconfig.generic.auto._
 
 // write config case class below
-// case class SparkDSConfig()
+ case class SparkDSConfig(name: String, masterUrl: String, transactionFile: String)
 
 // run with: sbt "runMain org.cscie88c.week10.SparkDSApplication"
 object SparkDSApplication {
@@ -23,11 +23,24 @@ object SparkDSApplication {
     spark.stop()
   }
 
-  def readConfig(): SparkDSConfig = ???
+  def readConfig(): SparkDSConfig = ConfigUtils.loadAppConfig[SparkDSConfig]("org.cscie88c.spark-ds-application")
   
-  def loadData(spark: SparkSession)(implicit conf: SparkDSConfig): Dataset[CustomerTransaction] = ???
+  def loadData(spark: SparkSession)(implicit conf: SparkDSConfig): Dataset[CustomerTransaction] = {
+    import spark.implicits._
+    val file = conf.transactionFile
+    spark.read
+      .format("csv")
+      .option("header", "true")
+      .option("inferSchema", "true")
+      .load(file)
+      .as[RawTransaction]
+      .map(CustomerTransaction(_))
+  }
 
-  def transactionTotalsByCategory(spark: SparkSession, transactions: Dataset[CustomerTransaction]): Dataset[(String, Double)] = ???
+  def transactionTotalsByCategory(spark: SparkSession, transactions: Dataset[CustomerTransaction]): Dataset[(String, Double)] = {
+    import spark.implicits._
+    transactions.groupByKey(_.transactionCategory).mapValues(_.transactionAmount).reduceGroups((a,b) => a+b)
+  }
 
-  def printTransactionTotalsByCategory(ds: Dataset[(String, Double)]): Unit = ???
+  def printTransactionTotalsByCategory(ds: Dataset[(String, Double)]): Unit = ds.foreach(println)
 }

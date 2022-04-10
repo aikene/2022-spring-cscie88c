@@ -32,12 +32,14 @@ object SparkRDDApplication {
   }
 
   def lineToTransactions(lines: RDD[String]): RDD[CustomerTransaction] = {
-    lines.map(CustomerTransaction(_))
+    lines.map(CustomerTransaction(_)).collect {
+      case Some(cs: CustomerTransaction) => cs
+    }
   }
 
   def transactionsAmountsByYear(transactions: RDD[CustomerTransaction]): RDD[(String, Double)] = {
-    ???
+    transactions.map(trans => (trans.transactionYear, trans.transactionAmount)).reduceByKey((a,b) => a+b)
   }
 
-  def printTransactionsAmountsByYear(transactions: RDD[(String, Double)]): Unit = ???
+  def printTransactionsAmountsByYear(transactions: RDD[(String, Double)]): Unit = transactions.foreach(println)
 }
