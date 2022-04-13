@@ -55,11 +55,31 @@ def main(args: Array[String]): Unit = {
 
   // def loadCampaignResponseData(spark: SparkSession)(implicit conf: SparkAverageTransactionAggregateJobConfig): Dataset[RawResponse] = ???
 
-  def aggregateDataWithMonoid(transactionDS: Dataset[RawTransaction]): Map[String,AverageTransactionAggregate] = ???
+  def aggregateDataWithMonoid(transactionDS: Dataset[RawTransaction]): Map[String,AverageTransactionAggregate] = {
+    import transactionDS.sparkSession.implicits._
+    transactionDS
+      .map{ trans =>
+        Map(trans.customer_id -> AverageTransactionAggregate(trans))
+      }
+      .reduce(_ |+| _)
+  }
 
   // def joinTransactionAndResponseData(responseDS: Dataset[RawResponse], transactionDS: Dataset[RawTransaction]): Dataset[RawTransaction] = ???
 
-  def saveAverageTransactionByCustomerId(spark: SparkSession, transactionsById: Map[String,AverageTransactionAggregate], path: String): Unit = ???
+  def saveAverageTransactionByCustomerId(spark: SparkSession, transactionsById: Map[String,AverageTransactionAggregate], path: String): Unit = {
+    import spark.implicits._
+    val outputDs = transactionsById.map {
+      case (trans) =>
+        WritableRow(trans._1, trans._2.averageAmount)
+    }.toSeq.toDF()
+
+    outputDs.coalesce(1)
+      .write
+      .format("csv")
+      .option("header","true")
+      .mode("overwrite")
+      .save(path)
+  }
 
   // def saveAverageTransactionAsParquet(spark: SparkSession, transactionsById: Map[String,AverageTransactionAggregate], path: String): Unit = ???
 }

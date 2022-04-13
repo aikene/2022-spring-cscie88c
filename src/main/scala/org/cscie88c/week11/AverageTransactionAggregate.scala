@@ -34,32 +34,5 @@ object AverageTransactionAggregate {
       )
     }
   }
-  def aggregateDataWithMonoid(transactionDS: Dataset[RawTransaction]): Map[String,AverageTransactionAggregate] = {
-    import transactionDS.sparkSession.implicits._
-    transactionDS
-      .map{ trans =>
-        Map(trans.customer_id -> AverageTransactionAggregate(trans))
-      }
-      .reduce(_ |+| _)
-  }
-
-  def saveAverageTransactionByCustomerId(spark: SparkSession, transactionsById: Map[String,AverageTransactionAggregate], path: String): Unit = {
-    import spark.implicits._
-//    val outputDs: WritableRow = transactionsById.asInstanceOf[WritableRow]
-    val outputDs = transactionsById.map {
-      case (trans) =>
-        WritableRow(trans._1, trans._2.averageAmount)
-    }.toSeq.toDF()
-
-    outputDs.coalesce(1)
-      .write
-      .format("csv")
-      .option("header","true")
-      .mode("overwrite")
-      .save(path)
-
-
-  }
-
 }
 
