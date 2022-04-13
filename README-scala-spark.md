@@ -11,12 +11,23 @@ docker pull hseeberger/scala-sbt:eclipse-temurin-11.0.14.1_1.6.2_2.13.8
 ```
 docker run -v `pwd`:/opt/projects/2022-spring-cscie88c -it --rm hseeberger/scala-sbt:eclipse-temurin-11.0.14.1_1.6.2_2.13.8 /bin/bash
 ```
+- Command that works for this repo:
+```
+docker run -v "`pwd`:/opt/projects/2022-spring-cscie88c-1" -it --rm hseeberger/scala-sbt:eclipse-temurin-11.0.14.1_1.6.2_2.13.8 /bin/bash
+
+```
 
 3. cd to the mounted volume
 
 ```
 cd /opt/projects/2022-spring-cscie88c
 ```
+- Command that works for this repo:
+
+```
+cd /opt/projects/2022-spring-cscie88c-1
+```
+
 
 4. Run Spark application
 ```

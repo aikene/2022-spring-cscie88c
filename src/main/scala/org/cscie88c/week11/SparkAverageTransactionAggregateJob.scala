@@ -44,7 +44,14 @@ def main(args: Array[String]): Unit = {
     // saveAverageTransactionAsParquet(spark,averageTransactionById, conf.outputPathTransaction)
   }
 
-  def loadTransactionData(spark: SparkSession)(implicit conf: SparkAverageTransactionAggregateJobConfig): Dataset[RawTransaction] = ???
+  def loadTransactionData(spark: SparkSession)(implicit conf: SparkAverageTransactionAggregateJobConfig): Dataset[RawTransaction] = {
+    import spark.implicits._
+    spark.read
+      .option("inferSchema","true")
+      .option("header","true")
+      .csv(conf.inputPathTransaction)
+      .as[RawTransaction]
+  }
 
   // def loadCampaignResponseData(spark: SparkSession)(implicit conf: SparkAverageTransactionAggregateJobConfig): Dataset[RawResponse] = ???
 
