@@ -60,6 +60,11 @@ docker exec -it spark_spark-master_1  /bin/bash
 ./bin/spark-submit --class "org.cscie88c.week11.SparkAverageTransactionAggregateJob" --master local[4] /opt/spark-apps/2022SpringSparkJob.jar
 ```
 
+```
+./bin/spark-submit --class "org.cscie88c.week11.SparkAverageTransactionAggregateJob" --master local[4] /opt/spark-apps/2022SpringSparkJob.jar
+
+```
+
 6. Review results
 ```
 ls docker/spark/data/output
