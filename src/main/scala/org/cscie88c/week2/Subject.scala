@@ -6,7 +6,7 @@ import org.cscie88c.week2.Student.allStudents
 final case class Subject(
   id: Int,
   name: String,
-  isStem: String
+  isStem: Boolean
 )
 
 object Subject {
@@ -16,7 +16,7 @@ object Subject {
     Subject(
       id = fields(0).toInt,
       name = fields(1),
-      isStem = fields(2)
+      isStem = fields(2).toBoolean
     )
   } 
 
