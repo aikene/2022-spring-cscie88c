@@ -14,5 +14,5 @@ class StudentTest extends StandardTest {
     }
   }
  }
-  
+
 }

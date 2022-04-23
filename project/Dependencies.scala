@@ -25,6 +25,9 @@ object Dependencies {
     "io.circe" %% "circe-parser" % circeVersion,
     "io.circe" %% "circe-literal" % circeVersion,
 
+    // to run scalacheck code snippets in sbt console
+    "org.scalacheck" %% "scalacheck" % "1.15.4",
+
     // support for typesafe configuration
     "com.github.pureconfig" %% "pureconfig" % pureconfigVersion,
 
@@ -40,6 +43,8 @@ object Dependencies {
 
     // logging
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
-    "ch.qos.logback" % "logback-classic" % "1.2.3"
+    "ch.qos.logback" % "logback-classic" % "1.2.3",
+
+    "com.twitter" % "algebird-core_2.13" % "0.13.8"
   )
 }
