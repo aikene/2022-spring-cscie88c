@@ -11,7 +11,7 @@ object Employee {
   def sortEmployeesBySalary(employees: List[Employee]): List[Employee] = {
     implicit val sortEmployeesBySalary: Ordering[Employee] =
       Ordering.by[Employee, Int](_.salary)
-    employees.sorted(sortEmployeesBySalary)
+    employees.sorted(sortEmployeesBySalary).reverse
   }
   
 }
