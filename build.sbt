@@ -13,14 +13,16 @@ lazy val root = (project in file(".")).
       "-deprecation",
       "-unchecked",
       "-language:postfixOps",
-      "-language:higherKinds", // HKT required for Monads and other HKT types
-      "-Wunused", // for scalafix
+      "-language:higherKinds" // HKT required for Monads and other HKT types
+      //"-Wunused", // for scalafix
     ),
     libraryDependencies ++= Dependencies.core ++ Dependencies.scalaTest,
     // assembly / mainClass := Some("org.cscie88c.MainApp"),
     // assembly / assemblyJarName := "2022SpringScalaIntro.jar",
-    assembly / mainClass := Some("org.cscie88c.week11.SparkAverageTransactionAggregateJob"),
-    assembly / assemblyJarName := "2022SpringSparkJob.jar",
+//    assembly / mainClass := Some("org.cscie88c.week11.SparkAverageTransactionAggregateJob"),
+//    assembly / assemblyJarName := "2022SpringSparkJob.jar",
+    assembly / mainClass := Some("org.cscie88c.final.SparkFinalProject"),
+    assembly / assemblyJarName := "FinalProject.jar",
     assembly / test := {},
     assembly / assemblyMergeStrategy := {
       case PathList("META-INF", xs @ _*) => MergeStrategy.discard

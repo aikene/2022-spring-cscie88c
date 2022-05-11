@@ -14,6 +14,7 @@ object Dependencies {
   val catsVersion = "2.2.0"
   val sparkVersion = "3.2.1"
   val AkkaVersion = "2.6.19"
+  val hadoopVersion = "3.1.0"
 
   lazy val core = Seq(
     // cats FP libary
@@ -36,7 +37,7 @@ object Dependencies {
 
     // spark
     "org.apache.spark" %% "spark-sql" % sparkVersion % Provided, // for submiting spark app as a job to cluster
-    // "org.apache.spark" %% "spark-sql" % sparkVersion, // for simple standalone spark app
+//    "org.apache.spark" %% "spark-sql" % sparkVersion, // for simple standalone spark app
 
     // akka streams
     "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
@@ -45,6 +46,15 @@ object Dependencies {
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
     "ch.qos.logback" % "logback-classic" % "1.2.3",
 
-    "com.twitter" % "algebird-core_2.13" % "0.13.8"
+    "com.twitter" % "algebird-core_2.13" % "0.13.8",
+
+    // writing to AWS - for submiting spark app as a job to cluster
+    "org.apache.hadoop" % "hadoop-common" % hadoopVersion % Provided,
+    "org.apache.hadoop" % "hadoop-client" % hadoopVersion % Provided,
+    "org.apache.hadoop" % "hadoop-aws" % hadoopVersion % Provided,
+
+//      "org.apache.hadoop" % "hadoop-common" % hadoopVersion,
+//      "org.apache.hadoop" % "hadoop-client" % hadoopVersion,
+//      "org.apache.hadoop" % "hadoop-aws" % hadoopVersion,
   )
 }
